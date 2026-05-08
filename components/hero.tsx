@@ -1,9 +1,11 @@
+import { majorMono, k2d } from "@/lib/fonts";
+
 export default function Hero() {
   return (
     <section className="relative flex flex-col items-center justify-center min-h-screen bg-[#f0efed] px-6 text-center">
       {/* Left border rail */}
       <div
-        className="absolute left-16 top-0 bottom-0 w-px bg-zinc-300"
+        className="absolute left-16 top-0 bottom-0 w-px bg-[#000000]"
         aria-hidden="true"
       />
       {/* Logo mark */}
@@ -13,8 +15,7 @@ export default function Hero() {
 
       {/* Wordmark */}
       <h1
-        className="text-[clamp(2.5rem,8vw,6rem)] font-light tracking-[0.25em] uppercase text-zinc-800 leading-tight"
-        style={{ fontFamily: "var(--font-geist-sans)" }}
+        className={`${majorMono.className} lowercase text-zinc-800 text-center text-5xl sm:text-7xl md:text-8xl lg:text-9xl leading-none font-bold tracking-[0.06em]`}
       >
         Fahrenheit
         <br />
@@ -22,7 +23,9 @@ export default function Hero() {
       </h1>
 
       {/* Tagline */}
-      <p className="mt-8 text-sm tracking-wide text-zinc-500 leading-relaxed">
+      <p
+        className={`${k2d.className} mt-8 text-center text-zinc-500 font-thin text-lg sm:text-xl md:text-2xl leading-none tracking-normal`}
+      >
         We build intelligence at the edge of what is known.
         <br />
         Our research becomes product.

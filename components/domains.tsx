@@ -1,131 +1,210 @@
+"use client";
+
+import { useRef, useEffect, useState, useCallback } from "react";
+import { majorMono, k2d } from "@/lib/fonts";
+
 const domains = [
   {
     id: "001",
-    title: "Deep Data\nArchitecture",
+    title: "Deep Data Architecture",
+    status: "Active",
     description:
-      "Building proprietary data pipelines that surface signal from noise at scale. Our deep data systems ingest, structure, and semantically index billions of data points — creating training substrates that give our models an unfair advantage.",
+      "Building proprietary data pipelines that surface signal from noise at scale. Our deep data systems ingest, structure, and semantically index billions of data points — creating training substrates that give our models an unfair advantage over any competitor relying on public datasets.",
     tags: ["Data Infrastructure", "Semantic Indexing", "Pipeline Engineering"],
   },
   {
     id: "002",
-    title: "Deep Data\nArchitecture",
+    title: "Small Language Models (SLM)",
+    status: "Active",
     description:
-      "Building proprietary data pipelines that surface signal from noise at scale. Our deep data systems ingest, structure, and semantically index billions of data points — creating training substrates that give our models an unfair advantage.",
-    tags: ["Data Infrastructure", "Semantic Indexing", "Pipeline Engineering"],
+      "Distilling frontier-level reasoning into models small enough to run on constrained hardware. Intelligence does not require scale — it requires precision. We build models under 7B parameters that outperform 70B baselines on domain-specific tasks. The future of AI is not bigger. It is smarter.",
+    tags: ["Model Compression", "Knowledge Distillation", "Edge Inference"],
   },
   {
     id: "003",
-    title: "Deep Data\nArchitecture",
+    title: "Autonomous Reasoning Architectures",
+    status: "Active",
     description:
-      "Building proprietary data pipelines that surface signal from noise at scale. Our deep data systems ingest, structure, and semantically index billions of data points — creating training substrates that give our models an unfair advantage.",
-    tags: ["Data Infrastructure", "Semantic Indexing", "Pipeline Engineering"],
+      "Systems that reason without supervision. Multi-step inference engines that decompose novel problems, form hypotheses, and self-correct in real time — without human-in-the-loop dependencies at inference time.",
+    tags: ["Chain-of-Thought", "Self-Correction", "Hypothesis Formation"],
   },
   {
     id: "004",
-    title: "Deep Data\nArchitecture",
+    title: "Synthetic Data Generation",
+    status: "Deployed",
     description:
-      "Building proprietary data pipelines that surface signal from noise at scale. Our deep data systems ingest, structure, and semantically index billions of data points — creating training substrates that give our models an unfair advantage.",
-    tags: ["Data Infrastructure", "Semantic Indexing", "Pipeline Engineering"],
+      "Proprietary pipelines that produce training data indistinguishable from real-world distributions. Models trained on our synthetic sets consistently outperform baselines — closing the data scarcity gap for niche domains where labeled data does not exist.",
+    tags: ["Synthetic Corpora", "Distribution Matching", "Domain Adaptation"],
   },
   {
     id: "005",
-    title: "Deep Data\nArchitecture",
+    title: "Multi-Agent Emergent Behavior",
+    status: "Active",
     description:
-      "Building proprietary data pipelines that surface signal from noise at scale. Our deep data systems ingest, structure, and semantically index billions of data points — creating training substrates that give our models an unfair advantage.",
-    tags: ["Data Infrastructure", "Semantic Indexing", "Pipeline Engineering"],
+      "Studying how coordinated intelligence arises from independent agents. Mapping the boundary between programmed behavior and spontaneous cooperation — and engineering systems that exploit emergent dynamics for real-world tasks.",
+    tags: ["Multi-Agent RL", "Emergent Coordination", "Swarm Intelligence"],
   },
   {
     id: "006",
-    title: "Deep Data\nArchitecture",
+    title: "Compressed Intelligence",
+    status: "Shipped",
     description:
-      "Building proprietary data pipelines that surface signal from noise at scale. Our deep data systems ingest, structure, and semantically index billions of data points — creating training substrates that give our models an unfair advantage.",
-    tags: ["Data Infrastructure", "Semantic Indexing", "Pipeline Engineering"],
+      "Distilling large-scale model capabilities into architectures small enough to run on constrained hardware without meaningful performance loss. Our compression techniques achieve 10x size reduction with under 3% accuracy degradation on production benchmarks.",
+    tags: ["Quantization", "Pruning", "LoRA Fine-tuning"],
   },
 ];
 
+const CARD_GAP = 16;
+
 export default function Domains() {
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const cardListRef = useRef<HTMLDivElement>(null);
+  const cardWindowRef = useRef<HTMLDivElement>(null);
+
+  const [translateY, setTranslateY] = useState(0);
+  const [totalScroll, setTotalScroll] = useState(2000);
+
+  // Measure actual DOM heights and compute totalScroll
+  const measure = useCallback(() => {
+    const list = cardListRef.current;
+    const win = cardWindowRef.current;
+    if (!list || !win) return;
+    const listH = list.scrollHeight;
+    const winH = win.clientHeight;
+    // How much we need to scroll the list so the last card's bottom aligns with window bottom
+    const needed = Math.max(listH - winH, 0);
+    setTotalScroll(needed);
+  }, []);
+
+  useEffect(() => {
+    // Measure after fonts/layout settle
+    const t = setTimeout(measure, 200);
+    window.addEventListener("resize", measure);
+    return () => {
+      clearTimeout(t);
+      window.removeEventListener("resize", measure);
+    };
+  }, [measure]);
+
+  useEffect(() => {
+    const onScroll = () => {
+      const el = wrapperRef.current;
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      const scrolled = Math.min(Math.max(-rect.top, 0), totalScroll);
+      setTranslateY(scrolled);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [totalScroll]);
+
+  // Active card index for progress dots
+  const activeIndex = Math.min(
+    Math.floor((translateY / Math.max(totalScroll, 1)) * domains.length),
+    domains.length - 1
+  );
+
   return (
-    <section
+    <div
       id="research"
-      className="relative bg-[#f0efed] px-6 py-32 overflow-hidden"
+      ref={wrapperRef}
+      style={{ height: `calc(100vh + ${totalScroll}px)` }}
+      className="relative bg-[#f0efed]"
     >
       {/* Left border rail */}
       <div
-        className="absolute left-16 top-0 bottom-0 w-px bg-zinc-300"
+        className="absolute left-16 top-0 bottom-0 w-px bg-[#000000] z-20"
         aria-hidden="true"
       />
 
-      <div className="max-w-6xl mx-auto">
-        {/* Header row */}
-        <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6 mb-16">
-          <div>
+      {/* Sticky viewport panel */}
+      <div className="sticky top-0 h-screen overflow-hidden">
+        <div className="h-full max-w-7xl mx-auto px-6 lg:px-16 flex gap-16 lg:gap-24 xl:gap-32 items-start py-16 lg:py-24">
+
+          {/* LEFT: sticky title */}
+          <div className="w-[260px] lg:w-[340px] xl:w-[420px] shrink-0 pt-2">
             <p className="text-xs tracking-widest text-zinc-400 mb-4 font-mono">
               02 // DOMAINS_OF_INQUIRY
             </p>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight uppercase text-zinc-900 leading-tight font-mono">
-              Domain of
+            <h2
+              className={`${majorMono.className} lowercase text-zinc-900 text-3xl sm:text-4xl md:text-5xl leading-none font-bold tracking-normal`}
+            >
+              domain of
               <br />
-              Inquiry
+              inquiry
             </h2>
+            <p className={`${k2d.className} text-zinc-500 mt-4 text-base sm:text-lg md:text-xl leading-relaxed`}>
+              Our research agenda spans the hardest problems in applied AI
+              from deep data infrastructure to emergent model behaviour.
+            </p>
           </div>
-          <p className="max-w-sm text-sm text-zinc-500 leading-relaxed md:pt-10 italic">
-            Our research agenda spans the hardest problems in applied AI from
-            deep data infrastructure to emergent model behaviour.
-          </p>
-        </div>
 
-        {/* Cards grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-zinc-300 border border-zinc-300">
-          {domains.map((domain) => (
-            <DomainCard key={domain.id} domain={domain} />
-          ))}
+          {/* RIGHT: scrolling card column — capped height so scroll animation always works */}
+          <div ref={cardWindowRef} className="flex-1 overflow-hidden relative h-[560px] lg:h-[640px] xl:h-[700px]">
+            <div
+              ref={cardListRef}
+              style={{
+                transform: `translateY(-${translateY}px)`,
+                willChange: "transform",
+                display: "flex",
+                flexDirection: "column",
+                gap: `${CARD_GAP}px`,
+                maxWidth: "100%",
+              }}
+            >
+              {domains.map((domain) => (
+                <DomainCard key={domain.id} domain={domain} />
+              ))}
+            </div>
+          </div>
+
         </div>
       </div>
-    </section>
+    </div>
   );
 }
 
 function DomainCard({
   domain,
 }: {
-  domain: { id: string; title: string; description: string; tags: string[] };
+  domain: { id: string; title: string; status: string; description: string; tags: string[] };
 }) {
   return (
-    <div className="bg-white p-6 flex flex-col gap-4 relative min-h-[280px]">
-      {/* Top row: number + arrow */}
+    <div className="shrink-0 w-full bg-[#F2F2F2] border border-[#212121] p-6 lg:p-8 flex flex-col gap-4">
+      {/* Top row: number + status */}
       <div className="flex items-start justify-between">
-        <span className="text-[10px] tracking-widest text-zinc-400 font-mono uppercase">
-          {domain.id}
-        </span>
+        <div className="flex flex-col gap-1.5">
+          <span className="text-[10px] lg:text-xs tracking-widest text-zinc-400 font-mono uppercase">
+            {domain.id}
+          </span>
+          <span className="text-[10px] lg:text-xs border border-zinc-400 text-zinc-500 px-2 py-0.5 font-mono tracking-wider">
+            {domain.status}
+          </span>
+        </div>
         <ArrowUpRight />
       </div>
 
-      {/* Title + dot grid */}
-      <div className="flex items-start justify-between gap-4">
-        <h3 className="text-sm font-bold uppercase tracking-wide text-zinc-900 font-mono whitespace-pre-line leading-snug">
-          {domain.title}
-        </h3>
-        <DotGrid />
-      </div>
+      {/* Title */}
+      <h3 className={`${k2d.className} text-zinc-900 text-2xl lg:text-3xl xl:text-4xl leading-tight font-semibold`}>
+        {domain.title}
+      </h3>
 
       {/* Description */}
-      <p className="text-[11px] text-zinc-500 leading-relaxed flex-1">
+      <p className={`${k2d.className} text-zinc-500 text-sm lg:text-base xl:text-lg leading-relaxed`}>
         {domain.description}
       </p>
 
-      {/* Tags + bottom arrow */}
-      <div className="flex items-end justify-between gap-2">
-        <div className="flex flex-wrap gap-1.5">
-          {domain.tags.map((tag) => (
-            <span
-              key={tag}
-              className="text-[9px] tracking-wider uppercase text-zinc-500 border border-zinc-300 px-2 py-0.5 font-mono"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-        <ArrowBottomRight />
+      {/* Tags */}
+      <div className="flex flex-wrap gap-1.5">
+        {domain.tags.map((tag) => (
+          <span
+            key={tag}
+            className="text-[9px] lg:text-[10px] tracking-wider uppercase text-zinc-500 border border-zinc-300 px-2 py-0.5 font-mono"
+          >
+            {tag}
+          </span>
+        ))}
       </div>
     </div>
   );
@@ -133,48 +212,8 @@ function DomainCard({
 
 function ArrowUpRight() {
   return (
-    <svg
-      width="14"
-      height="14"
-      viewBox="0 0 14 14"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className="text-zinc-400"
-    >
-      <path
-        d="M3 11L11 3M11 3H5M11 3V9"
-        stroke="currentColor"
-        strokeWidth="1.2"
-      />
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="text-zinc-400">
+      <path d="M3 11L11 3M11 3H5M11 3V9" stroke="currentColor" strokeWidth="1.2" />
     </svg>
-  );
-}
-
-function ArrowBottomRight() {
-  return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 16 16"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className="text-zinc-400 shrink-0"
-    >
-      <path
-        d="M4 4L12 12M12 12H6M12 12V6"
-        stroke="currentColor"
-        strokeWidth="1.2"
-      />
-    </svg>
-  );
-}
-
-function DotGrid() {
-  return (
-    <div className="grid grid-cols-4 gap-[3px] shrink-0 mt-1">
-      {Array.from({ length: 16 }).map((_, i) => (
-        <div key={i} className="w-[3px] h-[3px] rounded-full bg-zinc-300" />
-      ))}
-    </div>
   );
 }

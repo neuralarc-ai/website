@@ -1,64 +1,47 @@
 import Link from "next/link";
+import { majorMono } from "@/lib/fonts";
 
 export default function Footer() {
   return (
-    <footer className="relative bg-[#1a1a1a] text-white px-6 pt-12 pb-6">
-      {/* Left border rail */}
-      <div
-        className="absolute left-16 top-0 bottom-0 w-px bg-zinc-700"
-        aria-hidden="true"
-      />
+    <footer className="relative bg-[#111111] text-white overflow-hidden">
 
-      <div className="max-w-6xl mx-auto">
-        {/* Main footer row */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-8 pb-8 border-b border-zinc-700">
+      {/* Left border rail */}
+      <div className="absolute left-16 top-0 bottom-0 w-px bg-[#F2F2F2]" aria-hidden="true" />
+
+      {/* Content */}
+      <div className="relative z-10 min-h-[600px] flex flex-col justify-end px-6 pb-8 max-w-6xl mx-auto w-full">
+
+        {/* Bottom row: logo + nav */}
+        <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-8 pb-6 border-b border-zinc-700/50">
+
           {/* Logo + wordmark */}
           <div className="flex items-center gap-4">
             <LogoMark />
-            <span className="text-lg tracking-[0.2em] uppercase font-mono font-semibold text-white">
-              Fahrenheit
+            <span
+              className={`${majorMono.className} text-white lowercase leading-tight text-xl tracking-[0.06em]`}
+            >
+              fahrenheit
               <br />
-              Research
+              research
             </span>
           </div>
 
           {/* Nav links */}
           <nav className="flex items-center gap-6 flex-wrap">
-            <Link
-              href="#research"
-              className="text-xs tracking-widest text-zinc-400 hover:text-white transition-colors font-mono"
-            >
-              Research
-            </Link>
-            <Link
-              href="#"
-              className="text-xs tracking-widest text-zinc-400 hover:text-white transition-colors font-mono"
-            >
-              SLM
-            </Link>
-            <Link
-              href="#products"
-              className="text-xs tracking-widest text-zinc-400 hover:text-white transition-colors font-mono"
-            >
-              Products
-            </Link>
-            <Link
-              href="#"
-              className="text-xs tracking-widest text-zinc-400 hover:text-white transition-colors font-mono"
-            >
-              Kashew.ai
-            </Link>
-            <Link
-              href="#"
-              className="text-xs tracking-widest text-zinc-400 hover:text-white transition-colors font-mono"
-            >
-              Ninth.vc
-            </Link>
+            {["Research", "SLM", "Products", "Kashew.ai", "Ninth.vc"].map((item) => (
+              <Link
+                key={item}
+                href="#"
+                className="text-xs tracking-widest text-zinc-300 hover:text-white transition-colors font-mono"
+              >
+                {item}
+              </Link>
+            ))}
           </nav>
         </div>
 
         {/* Copyright */}
-        <p className="text-[11px] tracking-wide text-zinc-500 mt-6">
+        <p className="text-[11px] tracking-wide text-zinc-500 mt-6 font-mono">
           2025 Fahrenheit Research. All rights reserved.
         </p>
       </div>
@@ -69,8 +52,8 @@ export default function Footer() {
 function LogoMark() {
   return (
     <svg
-      width="40"
-      height="28"
+      width="48"
+      height="34"
       viewBox="0 0 48 32"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
