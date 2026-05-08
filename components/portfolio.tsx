@@ -48,7 +48,7 @@ export default function Portfolio() {
         aria-hidden="true"
       /> */}
 
-      <div className="relative z-10 max-w-6xl mx-auto w-full py-24 pt-48 lg:py-56 lg:pt-96">
+      <div className="relative z-10 max-w-6xl mx-auto w-full py-20 pt-32 lg:py-32 lg:pt-48">
         {/* Section label */}
         <p className="text-xs tracking-widest text-[#202020] mb-4 font-mono text-center">
           01 // PORTFOLIO

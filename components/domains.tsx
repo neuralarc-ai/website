@@ -52,7 +52,7 @@ export default function Domains() {
   return (
     <section
       id="research"
-      className="relative bg-[#f0efed] py-24 pb-64 md:py-56 md:pb-[35rem]"
+      className="relative bg-[#f0efed] py-20 pb-56 md:py-32 md:pb-[30rem]"
     >
       <img
         src="/images/pixels-3.png"
