@@ -66,7 +66,7 @@ export default function Contact() {
                   {item.email}
                 </span>
               </div>
-              <span className="text-zinc-400 group-hover:text-zinc-700 transition-colors text-lg">
+              <span className="text-white group-hover:text-zinc-700 transition-colors text-2xl font-bold">
                 →
               </span>
             </a>
