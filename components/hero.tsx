@@ -2,7 +2,7 @@ import { majorMono, k2d } from "@/lib/fonts";
 
 export default function Hero() {
   return (
-    <section className="relative flex flex-col items-center justify-center min-h-screen bg-[#f0efed] px-6 pb-72 text-center">
+    <section className="relative flex flex-col items-center justify-center min-h-screen bg-[#f0efed] px-4 sm:px-6 pb-40 sm:pb-56 md:pb-72 text-center overflow-hidden">
       {/* Left border rail */}
       <img
         src="/images/pixels-1.png"
@@ -17,7 +17,7 @@ export default function Hero() {
       <img
         src="/images/logo-black.svg"
         alt="Fahrenheit Research logo"
-        className="mb-18 w-20 h-auto -mt-16"
+        className="mb-10 sm:mb-14 md:mb-18 w-14 sm:w-16 md:w-20 h-auto -mt-8 sm:-mt-12 md:-mt-16"
       />
       <h1
         className={`${majorMono.className} lowercase text-center text-5xl sm:text-7xl md:text-8xl lg:text-9xl leading-none tracking-[0.06em] text-stroke-black`}
@@ -30,7 +30,7 @@ export default function Hero() {
 
       {/* Tagline */}
       <p
-        className={`${k2d.className} mt-8 text-center text-zinc-500 font-thin text-lg sm:text-xl md:text-2xl leading-none tracking-normal`}
+        className={`${k2d.className} mt-5 sm:mt-6 md:mt-8 text-center text-zinc-500 font-thin text-sm sm:text-lg md:text-xl lg:text-2xl leading-relaxed sm:leading-none tracking-normal px-2`}
       >
         We build intelligence at the edge of what is known.
         <br />

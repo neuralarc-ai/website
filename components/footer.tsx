@@ -60,9 +60,6 @@ export default function Footer() {
           </nav>
         </div>
 
-        {/* Full-width divider above copyright */}
-        <div className="w-full h-px bg-[#F2F2F2] z-10" aria-hidden="true" />
-
         {/* Copyright */}
         <p className="text-[11px] tracking-wide text-zinc-500 mt-3 mb-4 font-mono px-28 z-10">
           2025 Fahrenheit Research. All rights reserved.

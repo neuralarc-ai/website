@@ -44,7 +44,7 @@ export default function Portfolio() {
         aria-hidden="true"
       /> */}
 
-      <div className="max-w-6xl mx-auto w-full py-56 pt-96">
+      <div className="max-w-6xl mx-auto w-full py-24 pt-48 lg:py-56 lg:pt-96">
         {/* Section label */}
         <p className="text-xs tracking-widest text-[#202020] mb-4 font-mono text-center">
           01 // PORTFOLIO
@@ -52,7 +52,7 @@ export default function Portfolio() {
 
         {/* Heading */}
         <h2
-          className={`${majorMono.className} lowercase text-center mb-40 text-3xl sm:text-4xl md:text-5xl leading-none tracking-normal text-stroke-black`}
+          className={`${majorMono.className} lowercase text-center mb-16 lg:mb-40 text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-none tracking-normal text-stroke-black`}
           style={{ color: "#202020" }}
         >
           Our companies dont just enter
@@ -61,7 +61,7 @@ export default function Portfolio() {
         </h2>
 
         {/* Two cards side by side */}
-        <div className="w-full flex items-center justify-around gap-8 ">
+        <div className="w-full flex flex-col lg:flex-row items-center justify-around gap-8">
           {companies.map((company) => (
             <CompanyCard key={company.id} company={company} />
           ))}
@@ -114,7 +114,7 @@ function CompanyCard({
 
   return (
     <div
-      className="relative flex flex-col items-center px-10 pt-14 pb-10 min-w-100 min-h-[600px] border transition-all duration-400 ease-in-out cursor-pointer"
+      className="relative flex flex-col items-center px-10 pt-14 pb-10 w-full lg:w-auto lg:min-w-[400px] min-h-[500px] lg:min-h-[600px] border transition-all duration-400 ease-in-out cursor-pointer"
       style={{ ...bgStyle, borderColor }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}

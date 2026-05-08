@@ -50,7 +50,10 @@ const domains = [
 
 export default function Domains() {
   return (
-    <section id="research" className="relative bg-[#f0efed] py-56 pb-[35rem]">
+    <section
+      id="research"
+      className="relative bg-[#f0efed] py-24 pb-64 md:py-56 md:pb-[35rem]"
+    >
       <img
         src="/images/pixels-3.png"
         className="absolute bottom-0 left-0 w-full z-10 pointer-events-none"
@@ -113,7 +116,7 @@ function DomainCard({
 
   return (
     <div
-      className="relative border border-[#21212166] p-6 lg:p-8 flex flex-col gap-5 h-[300px] transition-colors duration-300"
+      className="relative border border-[#21212166] p-5 sm:p-6 lg:p-8 flex flex-col gap-4 sm:gap-5 min-h-[280px] sm:h-[300px] transition-colors duration-300"
       style={{ backgroundColor: hovered ? "#212121" : "#F2F2F2" }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
@@ -131,7 +134,7 @@ function DomainCard({
 
       {/* Title */}
       <h3
-        className={`${k2d.className} text-2xl leading-none font-semibold tracking-normal transition-colors duration-300`}
+        className={`${k2d.className} text-xl sm:text-2xl leading-tight sm:leading-none font-semibold tracking-normal transition-colors duration-300`}
         style={{ color: hovered ? "#ffffff" : "#18181b" }}
       >
         {domain.title}
@@ -139,23 +142,23 @@ function DomainCard({
 
       {/* Description */}
       <p
-        className={`${k2d.className} text-sm leading-relaxed line-clamp-3 flex-1 pr-16 transition-colors duration-300`}
+        className={`${k2d.className} text-sm leading-relaxed line-clamp-3 flex-1 pr-4 sm:pr-16 transition-colors duration-300`}
         style={{ color: hovered ? "#d4d4d8" : "#71717a" }}
       >
         {domain.description}
       </p>
 
       {/* Dot grid — vertically centered, right side */}
-      <div className="absolute top-1/2 -translate-y-1/2 right-4">
+      <div className="absolute top-1/2 -translate-y-1/2 right-4 hidden sm:block">
         <DotGrid hovered={hovered} />
       </div>
 
       {/* Tags — 2 per row */}
-      <div className="grid grid-cols-2 gap-1.5 mt-auto">
+      <div className="grid grid-cols-2 sm:grid-cols-2 gap-1.5 mt-auto">
         {domain.tags.map((tag) => (
           <span
             key={tag}
-            className="text-[9px] tracking-wider uppercase px-2 py-0.5 font-mono text-center transition-colors duration-300"
+            className="text-[8px] sm:text-[9px] tracking-wider uppercase px-1.5 sm:px-2 py-0.5 font-mono text-center transition-colors duration-300"
             style={{
               color: hovered ? "#d4d4d8" : "#71717a",
               borderWidth: "1px",
