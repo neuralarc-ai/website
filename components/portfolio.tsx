@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { majorMono, k2d } from "@/lib/fonts";
 import Link from "next/link";
+import { PixelFloat } from "./PixelFloat";
+import { GlitchImage } from "./GlitchImage";
 
 const companies = [
   {
@@ -33,18 +35,20 @@ export default function Portfolio() {
       id="products"
       className="relative bg-[#f0efed] px-6 min-h-screen flex flex-col justify-center py-24 overflow-hidden"
     >
-      <img
+      <GlitchImage
         src="/images/pixels-2.png"
         className="absolute top-0 left-0 w-full"
         alt=""
+        align="top"
       />
+      <PixelFloat count={50} color="#202020" />
       {/* Left border rail */}
       {/* <div
         className="absolute left-16 top-0 bottom-0 w-px bg-[#202020]"
         aria-hidden="true"
       /> */}
 
-      <div className="max-w-6xl mx-auto w-full py-24 pt-48 lg:py-56 lg:pt-96">
+      <div className="relative z-10 max-w-6xl mx-auto w-full py-24 pt-48 lg:py-56 lg:pt-96">
         {/* Section label */}
         <p className="text-xs tracking-widest text-[#202020] mb-4 font-mono text-center">
           01 // PORTFOLIO
