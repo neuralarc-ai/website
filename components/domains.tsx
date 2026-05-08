@@ -1,4 +1,7 @@
+"use client";
+
 import { majorMono, k2d } from "@/lib/fonts";
+import { useState } from "react";
 
 const domains = [
   {
@@ -50,16 +53,16 @@ export default function Domains() {
     <section id="research" className="relative bg-[#f0efed] py-56 pb-[35rem]">
       <img
         src="/images/pixels-3.png"
-        className="absolute bottom-0 left-0 w-full z-10"
+        className="absolute bottom-0 left-0 w-full z-10 pointer-events-none"
         alt=""
         aria-hidden="true"
       />
 
       {/* Left border rail */}
-      <div
+      {/* <div
         className="absolute left-16 top-0 bottom-0 w-px bg-[#202020] z-20"
         aria-hidden="true"
-      />
+      /> */}
 
       <div className="max-w-[1400px] mx-auto px-6 lg:px-16 z-10">
         {/* Section header */}
@@ -106,33 +109,45 @@ function DomainCard({
     tags: string[];
   };
 }) {
+  const [hovered, setHovered] = useState(false);
+
   return (
-    <div className="relative bg-[#F2F2F2] hover:bg-[#212121] border border-[#21212166] p-6 lg:p-8 flex flex-col gap-5 h-[300px] transition-colors duration-300 group">
+    <div
+      className="relative border border-[#21212166] p-6 lg:p-8 flex flex-col gap-5 h-[300px] transition-colors duration-300"
+      style={{ backgroundColor: hovered ? "#212121" : "#F2F2F2" }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
       {/* Top row: number + arrow */}
       <div className="flex items-start justify-between">
-        <span className="text-xs lg:text-xs tracking-widest text-zinc-400 group-hover:text-zinc-500 font-mono transition-colors duration-300">
+        <span
+          className="text-xs tracking-widest font-mono transition-colors duration-300"
+          style={{ color: hovered ? "#71717a" : "#a1a1aa" }}
+        >
           {domain.id}
         </span>
-        <ArrowUpRight />
+        <ArrowUpRight hovered={hovered} />
       </div>
 
       {/* Title */}
       <h3
-        className={`${k2d.className} text-zinc-900 group-hover:text-white text-2xl leading-none font-semibold tracking-normal transition-colors duration-300`}
+        className={`${k2d.className} text-2xl leading-none font-semibold tracking-normal transition-colors duration-300`}
+        style={{ color: hovered ? "#ffffff" : "#18181b" }}
       >
         {domain.title}
       </h3>
 
       {/* Description */}
       <p
-        className={`${k2d.className} text-zinc-500 group-hover:text-zinc-300 text-sm leading-relaxed line-clamp-3 flex-1 pr-16 transition-colors duration-300`}
+        className={`${k2d.className} text-sm leading-relaxed line-clamp-3 flex-1 pr-16 transition-colors duration-300`}
+        style={{ color: hovered ? "#d4d4d8" : "#71717a" }}
       >
         {domain.description}
       </p>
 
       {/* Dot grid — vertically centered, right side */}
       <div className="absolute top-1/2 -translate-y-1/2 right-4">
-        <DotGrid />
+        <DotGrid hovered={hovered} />
       </div>
 
       {/* Tags — 2 per row */}
@@ -140,7 +155,13 @@ function DomainCard({
         {domain.tags.map((tag) => (
           <span
             key={tag}
-            className="text-[9px] tracking-wider uppercase text-zinc-500 group-hover:text-zinc-300 border border-zinc-300 group-hover:border-zinc-600 px-2 py-0.5 font-mono text-center transition-colors duration-300"
+            className="text-[9px] tracking-wider uppercase px-2 py-0.5 font-mono text-center transition-colors duration-300"
+            style={{
+              color: hovered ? "#d4d4d8" : "#71717a",
+              borderWidth: "1px",
+              borderStyle: "solid",
+              borderColor: hovered ? "#52525b" : "#d4d4d8",
+            }}
           >
             {tag}
           </span>
@@ -148,12 +169,12 @@ function DomainCard({
       </div>
 
       {/* Bottom-right corner bracket */}
-      <CornerBracket />
+      <CornerBracket hovered={hovered} />
     </div>
   );
 }
 
-function DotGrid() {
+function DotGrid({ hovered }: { hovered: boolean }) {
   const cols = 5;
   const rows = 5;
   return (
@@ -169,21 +190,23 @@ function DotGrid() {
       {Array.from({ length: cols * rows }).map((_, i) => (
         <div
           key={i}
-          className="w-[4px] h-[4px] rounded-full bg-zinc-900 group-hover:bg-white transition-colors duration-300"
+          className="w-[4px] h-[4px] rounded-full transition-colors duration-300"
+          style={{ backgroundColor: hovered ? "#ffffff" : "#18181b" }}
         />
       ))}
     </div>
   );
 }
 
-function ArrowUpRight() {
+function ArrowUpRight({ hovered }: { hovered: boolean }) {
   return (
     <svg
       width="14"
       height="14"
       viewBox="0 0 14 14"
       fill="none"
-      className="text-zinc-900 group-hover:text-white shrink-0 transition-colors duration-300"
+      className="shrink-0 transition-colors duration-300"
+      style={{ color: hovered ? "#ffffff" : "#18181b" }}
     >
       <path
         d="M3 11L11 3M11 3H5M11 3V9"
@@ -194,22 +217,19 @@ function ArrowUpRight() {
   );
 }
 
-function CornerBracket() {
+function CornerBracket({ hovered }: { hovered: boolean }) {
+  const fill = hovered ? "#ffffff" : "#212121";
   return (
     <svg
-      width="18"
-      height="18"
-      viewBox="0 0 18 18"
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
       fill="none"
-      className="absolute bottom-4 right-4 text-zinc-400 group-hover:text-white transition-colors duration-300"
+      className="absolute bottom-4 right-4"
       aria-hidden="true"
     >
-      <path
-        d="M18 11V18H11"
-        stroke="currentColor"
-        strokeWidth="1"
-        fill="none"
-      />
+      <rect x="9" y="0" width="7" height="10" fill={fill} />
+      <rect x="0" y="7" width="12" height="7" fill={fill} />
     </svg>
   );
 }

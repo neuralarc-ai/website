@@ -10,17 +10,17 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="relative bg-[#212121] text-white px-6 py-24 overflow-hidden"
+      className="relative bg-[#212121] text-white px-6 pt-40 pb-60 overflow-hidden"
     >
       {/* Left border rail */}
-      <div
+      {/* <div
         className="absolute left-16 top-0 bottom-0 w-px bg-[#F2F2F2]"
         aria-hidden="true"
-      />
+      /> */}
 
       {/* Large section number */}
 
-      <div className="max-w-6xl mx-auto w-full">
+      <div className="max-w-7xl mx-auto w-full">
         <div className="max-w-xl">
           {/* Section label */}
           <p className="text-xs tracking-widest text-white/80 mb-6 font-mono">
@@ -47,7 +47,7 @@ export default function Contact() {
         </div>
 
         {/* Contact rows */}
-        <div className="border border-zinc-300">
+        <div className="border border-zinc-300 max-w-6xl">
           {contacts.map((item, i) => (
             <a
               key={i}
@@ -55,11 +55,13 @@ export default function Contact() {
               className="flex items-center justify-between px-6 py-5 border-b border-zinc-300 last:border-b-0 group hover:bg-zinc-100 transition-colors"
             >
               <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-24">
-                <span className="text-xs tracking-widest uppercase text-zinc-400 font-mono whitespace-nowrap shrink-0">
+                <span
+                  className={`${k2d.className} text-xs tracking-widest uppercase text-zinc-400 font-mono whitespace-nowrap shrink-0 w-[220px]`}
+                >
                   {item.label}
                 </span>
                 <span
-                  className={`${k2d.className} text-white group-hover:text-zinc-900 font-semibold text-lg`}
+                  className={`${k2d.className} text-white group-hover:text-zinc-900 font-normal text-lg`}
                 >
                   {item.email}
                 </span>

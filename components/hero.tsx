@@ -9,11 +9,16 @@ export default function Hero() {
         className="absolute bottom-0 right-0 w-full"
         alt=""
       />
-      <div
+      {/* <div
         className="absolute left-16 top-0 bottom-0 w-px bg-[#202020]"
         aria-hidden="true"
-      />
+      /> */}
       {/* Wordmark */}
+      <img
+        src="/images/logo-black.svg"
+        alt="Fahrenheit Research logo"
+        className="mb-18 w-20 h-auto -mt-16"
+      />
       <h1
         className={`${majorMono.className} lowercase text-center text-5xl sm:text-7xl md:text-8xl lg:text-9xl leading-none tracking-[0.06em] text-stroke-black`}
         style={{ color: "#202020" }}

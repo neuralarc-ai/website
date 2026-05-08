@@ -3,10 +3,10 @@ import Link from "next/link";
 export default function Header() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-center px-8 py-5 bg-[#f0efed]">
-      <div
+      {/* <div
         className="absolute left-16 top-0 bottom-0 w-px bg-[#202020]"
         aria-hidden="true"
-      />
+      /> */}
       {/* Centered nav links */}
       {/* <nav className="flex items-center gap-8">
         <Link
@@ -34,7 +34,7 @@ export default function Header() {
           Contact
         </Link>
       </nav> */}
-      <img src="/images/logo-black.svg" alt="" />
+      {/* Logo moved to hero section */}
     </header>
   );
 }

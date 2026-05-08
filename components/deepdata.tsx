@@ -9,14 +9,14 @@ const stats = [
 
 export default function DeepData() {
   return (
-    <section className="relative bg-[#212121] text-white px-6 py-24 min-h-[500px] flex items-center">
+    <section className="relative bg-[#212121] text-white px-6 pt-24 pb-60 min-h-[500px] flex items-center">
       {/* Left border rail */}
-      <div
+      {/* <div
         className="absolute left-16 top-0 bottom-0 w-px bg-[#F2F2F2]"
         aria-hidden="true"
-      />
+      /> */}
 
-      <div className="max-w-6xl mx-auto w-full flex flex-col md:flex-row gap-16 md:gap-24 items-start">
+      <div className="max-w-7xl mx-auto w-full flex flex-col md:flex-row gap-16 md:gap-24 items-start">
         {/* LEFT */}
         <div className="md:w-[380px] shrink-0">
           <p className="text-xs tracking-widest text-zinc-500 mb-6 font-mono">
@@ -32,8 +32,8 @@ export default function DeepData() {
           <p
             className={`${k2d.className} text-zinc-400 max-w-[320px] text-base sm:text-lg md:text-xl leading-relaxed`}
           >
-            Years of proprietary data infrastructure, annotation, and enrichment
-            power models that perform on real problems with real users.
+            Proprietary data infrastructure and annotation power models built
+            for real problems.
           </p>
         </div>
 
