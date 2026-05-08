@@ -9,7 +9,7 @@ const companies = [
     id: "kashew",
     name: "Kashew AI",
     description:
-      "AI powered prospecting, pipeline, and relationship intelligence.",
+      "AI powered prospecting, pipeline,\nand relationship intelligence.\nTurn signals into pipeline.",
     website: "https://kashew.ai",
     logo: "/kashew-logo.svg",
     hoverBg: "#103C28",
@@ -19,7 +19,7 @@ const companies = [
     id: "ninth",
     name: "Ninth",
     description:
-      "Venture intelligence for smarter fundraising and introductions.",
+      "Venture intelligence for smarter\nfundraising and introductions.\nData-driven dealflow, simplified.",
     website: "https://ninth.vc",
     logo: "/ninth-logo.svg",
     hoverBg: "linear-gradient(to bottom, #FBC439, #F47437)",
@@ -102,7 +102,7 @@ function CompanyCard({
     ? company.hoverTextDark
       ? "rgba(32,32,32,0.7)"
       : "rgba(255,255,255,0.75)"
-    : "rgba(32,32,32,0.65)";
+    : "#71717a";
 
   const borderColor = hovered ? "transparent" : "#d4d4d8";
 
@@ -164,7 +164,7 @@ function CompanyCard({
 
       {/* Description */}
       <p
-        className={`${k2d.className} text-center max-w-[240px] mt-14 font-normal text-base leading-snug tracking-normal transition-colors duration-300`}
+        className={`${k2d.className} text-center max-w-[240px] mt-14 font-normal text-base leading-snug tracking-normal transition-colors duration-300 whitespace-pre-line`}
         style={{ color: mutedColor }}
       >
         {company.description}

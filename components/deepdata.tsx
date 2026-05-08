@@ -19,7 +19,7 @@ export default function DeepData() {
       <div className="max-w-7xl mx-auto w-full flex flex-col md:flex-row gap-16 md:gap-24 items-start">
         {/* LEFT */}
         <div className="md:w-[380px] shrink-0">
-          <p className="text-xs tracking-widest text-zinc-500 mb-6 font-mono">
+          <p className="text-xs tracking-widest text-white/80 mb-6 font-mono">
             04 // DEEP DATA
           </p>
           <h2

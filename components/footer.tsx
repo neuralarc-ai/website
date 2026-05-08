@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { majorMono } from "@/lib/fonts";
+import { majorMono, k2d } from "@/lib/fonts";
 
 export default function Footer() {
   return (
@@ -52,7 +52,7 @@ export default function Footer() {
                 {...(item.external
                   ? { target: "_blank", rel: "noopener noreferrer" }
                   : {})}
-                className="text-xs tracking-widest text-zinc-300 hover:text-white transition-colors font-mono"
+                className={`${k2d.className} text-xs tracking-widest text-zinc-300 hover:text-white transition-colors`}
               >
                 {item.label}
               </Link>
