@@ -128,3 +128,13 @@
     @apply font-sans;
   }
 }
+
+.text-stroke-white {
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: white;
+}
+
+.text-stroke-black {
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: black;
+}

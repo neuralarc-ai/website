@@ -2,20 +2,21 @@ import { majorMono, k2d } from "@/lib/fonts";
 
 export default function Hero() {
   return (
-    <section className="relative flex flex-col items-center justify-center min-h-screen bg-[#f0efed] px-6 text-center">
+    <section className="relative flex flex-col items-center justify-center min-h-screen bg-[#f0efed] px-6 pb-72 text-center">
       {/* Left border rail */}
+      <img
+        src="/images/pixels-1.png"
+        className="absolute bottom-0 right-0 w-full"
+        alt=""
+      />
       <div
-        className="absolute left-16 top-0 bottom-0 w-px bg-[#000000]"
+        className="absolute left-16 top-0 bottom-0 w-px bg-[#202020]"
         aria-hidden="true"
       />
-      {/* Logo mark */}
-      <div className="mb-24">
-        <LogoMark />
-      </div>
-
       {/* Wordmark */}
       <h1
-        className={`${majorMono.className} lowercase text-zinc-800 text-center text-5xl sm:text-7xl md:text-8xl lg:text-9xl leading-none font-bold tracking-[0.06em]`}
+        className={`${majorMono.className} lowercase text-center text-5xl sm:text-7xl md:text-8xl lg:text-9xl leading-none tracking-[0.06em] text-stroke-black`}
+        style={{ color: "#202020" }}
       >
         Fahrenheit
         <br />

@@ -42,7 +42,8 @@ export default function Principles() {
     <div
       ref={wrapperRef}
       style={{ height: `calc(100vh + ${TOTAL_SCROLL}px)` }}
-      className="relative bg-[#111111]"
+      className="relative bg-[#212121]"
+      id="principles"
     >
       {/* Left border rail */}
       <div
@@ -51,11 +52,10 @@ export default function Principles() {
       />
 
       {/* Sticky panel */}
-      <div className="sticky top-0 h-screen flex flex-col justify-center px-6 bg-[#111111] z-10">
+      <div className="sticky top-0 h-screen flex flex-col justify-center px-6 bg-[#212121] z-10">
         <div className="max-w-6xl mx-auto w-full py-16">
-
           {/* Section label */}
-          <p className="text-xs tracking-widest text-zinc-600 mb-16 font-mono">
+          <p className="text-xs tracking-widest text-white/80 mb-16 font-mono">
             03 // OPERATING PRINCIPLES
           </p>
 
@@ -67,9 +67,11 @@ export default function Principles() {
                 className={`${k2d.className} uppercase font-medium text-2xl sm:text-3xl md:text-4xl lg:text-[clamp(2rem,4vw,3.5rem)] leading-[120%] tracking-normal`}
                 style={{
                   opacity: visibleCount > i ? 1 : 0,
-                  transform: visibleCount > i ? "translateY(0px)" : "translateY(28px)",
+                  transform:
+                    visibleCount > i ? "translateY(0px)" : "translateY(28px)",
                   color: "#ffffff",
-                  transition: "opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1)",
+                  transition:
+                    "opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1)",
                   willChange: "opacity, transform",
                 }}
               >
@@ -77,7 +79,6 @@ export default function Principles() {
               </p>
             ))}
           </div>
-
         </div>
       </div>
     </div>
