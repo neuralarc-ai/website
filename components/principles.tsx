@@ -12,7 +12,7 @@ const lines = [
   "Is ours.",
 ];
 
-const SCROLL_PER_LINE = 220;
+const SCROLL_PER_LINE = 400;
 const TOTAL_SCROLL = (lines.length - 1) * SCROLL_PER_LINE;
 
 export default function Principles() {

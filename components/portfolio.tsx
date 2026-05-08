@@ -9,7 +9,7 @@ const companies = [
     id: "kashew",
     name: "Kashew AI",
     description:
-      "AI powered prospecting, pipeline,\nand relationship intelligence.\nTurn signals into pipeline.",
+      "AI powered prospecting, pipeline,\nand relationship intelligence.\nTurn signals into pipeline.\nAutomate outreach at scale.\nSmarter deals, faster closes.",
     website: "https://kashew.ai",
     logo: "/kashew-logo.svg",
     hoverBg: "#103C28",
@@ -19,7 +19,7 @@ const companies = [
     id: "ninth",
     name: "Ninth",
     description:
-      "Venture intelligence for smarter\nfundraising and introductions.\nData-driven dealflow, simplified.",
+      "Venture intelligence for smarter\nfundraising and introductions.\nData-driven dealflow, simplified.\nConnect with the right investors.\nBuild networks that compound.",
     website: "https://ninth.vc",
     logo: "/ninth-logo.svg",
     hoverBg: "linear-gradient(to bottom, #FBC439, #F47437)",
