@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { geistSans, geistMono, majorMono, k2d } from "@/lib/fonts";
 import "./globals.css";
-import Header from "@/components/header";
 
 export const metadata: Metadata = {
   title: "Fahrenheit Research",
@@ -20,7 +19,6 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} ${majorMono.variable} ${k2d.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <Header />
         <main className="flex flex-col flex-1">{children}</main>
       </body>
     </html>

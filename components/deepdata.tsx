@@ -42,10 +42,10 @@ export default function DeepData() {
           {stats.map((stat, i) => (
             <div
               key={i}
-              className="border border-zinc-700 px-8 py-8 flex flex-col gap-2"
+              className="border border-zinc-700 px-4 py-6 md:px-5 md:py-6 lg:px-8 lg:py-8 flex flex-col gap-2"
             >
               <span
-                className={`${k2d.className} text-white font-bold text-3xl sm:text-4xl md:text-5xl leading-none`}
+                className={`${k2d.className} text-white font-bold text-3xl sm:text-4xl md:text-3xl lg:text-5xl leading-none`}
               >
                 {stat.value}
               </span>

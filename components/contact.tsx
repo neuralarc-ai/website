@@ -24,7 +24,7 @@ export default function Contact() {
         <div className="max-w-xl">
           {/* Section label */}
           <p className="text-xs tracking-widest text-white/80 mb-6 font-mono">
-            05 // CONTACT
+            06 // CONTACT
           </p>
 
           {/* Title */}

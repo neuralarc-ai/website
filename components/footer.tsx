@@ -10,7 +10,7 @@ export default function Footer() {
         style={{ bottom: "calc(1px + 2.75rem)" }}
         aria-hidden="true"
       /> */}
-
+      <div className="w-full absolute h-20 bg-linear-to-b from-[#212121] to-transparent top-0 z-10" />
       <img
         src="/images/planet.svg"
         alt="Planet"
@@ -18,18 +18,18 @@ export default function Footer() {
         aria-hidden="true"
       />
       {/* Content */}
-      <div className="min-h-[80dvh] flex flex-col justify-end w-full">
+      <div className=" h-screen md:h-[80dvh] flex flex-col justify-end w-full">
         {/* Bottom row: logo + nav */}
-        <div className="flex w-full items-end justify-between gap-8 pb-6 px-28 z-10">
+        <div className="flex flex-col lg:flex-row w-full lg:items-end lg:justify-between gap-6 pb-6 px-6 sm:px-10 lg:px-28 z-10">
           {/* Logo + wordmark */}
           <div className="flex items-center gap-4">
             <img
               src="/images/logo-white-big.svg"
               alt=""
-              className="w-20 h-auto"
+              className="w-14 sm:w-16 lg:w-20 h-auto"
             />
             <span
-              className={`${majorMono.className} text-white lowercase leading-tight text-4xl tracking-[0.06em] text-stroke`}
+              className={`${majorMono.className} text-white lowercase leading-tight text-2xl sm:text-3xl lg:text-4xl tracking-[0.06em] text-stroke`}
             >
               fahrenheit
               <br />
@@ -38,7 +38,7 @@ export default function Footer() {
           </div>
 
           {/* Nav links */}
-          <nav className="flex items-center gap-6 flex-wrap">
+          <nav className="flex items-center gap-4 lg:gap-6 flex-wrap">
             {[
               { label: "Research", href: "#research" },
               { label: "Products", href: "#products" },
@@ -61,7 +61,7 @@ export default function Footer() {
         </div>
 
         {/* Copyright */}
-        <p className="text-[11px] tracking-wide text-zinc-500 mt-3 mb-4 font-mono px-28 z-10">
+        <p className="text-[11px] tracking-wide text-zinc-500 mt-3 mb-4 font-mono px-6 sm:px-10 lg:px-28 z-10">
           2025 Fahrenheit Research. All rights reserved.
         </p>
       </div>

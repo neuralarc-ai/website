@@ -12,47 +12,52 @@ const lines = [
   "Is ours.",
 ];
 
-const SCROLL_PER_LINE = 400;
-const TOTAL_SCROLL = (lines.length - 1) * SCROLL_PER_LINE;
+// Delay (ms) before each line fades in after the section enters view
+const DELAYS = [0, 1000, 2000, 3000, 4000, 5000];
 
 export default function Principles() {
-  const wrapperRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
   const [visibleCount, setVisibleCount] = useState(0);
+  const timersRef = useRef<ReturnType<typeof setTimeout>[]>([]);
 
   useEffect(() => {
-    const onScroll = () => {
-      const el = wrapperRef.current;
-      if (!el) return;
-      setVisibleCount((prev) => {
-        // Once all lines are visible, never go back
-        if (prev >= lines.length) return prev;
-        const rect = el.getBoundingClientRect();
-        const scrolled = Math.min(Math.max(-rect.top, 0), TOTAL_SCROLL);
-        const count = Math.floor(scrolled / SCROLL_PER_LINE) + 1;
-        return Math.min(count, lines.length);
-      });
+    const el = sectionRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          // Clear any existing timers
+          timersRef.current.forEach(clearTimeout);
+          timersRef.current = [];
+
+          // Schedule each line to appear at its delay
+          DELAYS.forEach((delay, i) => {
+            const t = setTimeout(() => {
+              setVisibleCount((prev) => Math.max(prev, i + 1));
+            }, delay);
+            timersRef.current.push(t);
+          });
+
+          // Stop observing after first trigger
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.2 },
+    );
+
+    observer.observe(el);
+
+    return () => {
+      observer.disconnect();
+      timersRef.current.forEach(clearTimeout);
     };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
-    <div
-      ref={wrapperRef}
-      style={{ height: `calc(100vh + ${TOTAL_SCROLL}px)` }}
-      className="relative bg-[#212121]"
-      id="principles"
-    >
-      {/* Left border rail */}
-      {/* <div
-        className="absolute left-16 top-0 bottom-0 w-px bg-[#F2F2F2] z-20"
-        aria-hidden="true"
-      /> */}
-
-      {/* Sticky panel */}
-      <div className="sticky top-0 h-screen flex flex-col justify-center px-6 bg-[#212121] z-10">
-        <div className="max-w-7xl mx-auto w-full py-16">
+    <div ref={sectionRef} className="relative bg-[#212121]" id="principles">
+      <div className="flex flex-col justify-center px-6 py-24 md:py-36 bg-[#212121]">
+        <div className="max-w-7xl mx-auto w-full">
           {/* Section label */}
           <p className="text-xs tracking-widest text-white/80 mb-16 font-mono">
             03 // OPERATING PRINCIPLES
@@ -68,10 +73,11 @@ export default function Principles() {
                   className={`${k2d.className} uppercase font-medium text-2xl sm:text-3xl md:text-4xl lg:text-[clamp(2rem,4vw,3.5rem)] leading-[120%] tracking-normal`}
                   style={{
                     opacity: visible ? 1 : 0,
-                    transform: visible ? "translateY(0px)" : "translateY(40px)",
-                    filter: visible ? "blur(0px)" : "blur(8px)",
+                    transform: visible ? "translateY(0px)" : "translateY(24px)",
+                    filter: visible ? "blur(0px)" : "blur(12px)",
                     color: "#ffffff",
-                    transition: `opacity 1s cubic-bezier(0.16,1,0.3,1) 0s, transform 1s cubic-bezier(0.16,1,0.3,1) 0s, filter 1s cubic-bezier(0.16,1,0.3,1) 0s`,
+                    transition:
+                      "opacity 1.6s cubic-bezier(0.4,0,0.2,1), transform 1.6s cubic-bezier(0.4,0,0.2,1), filter 1.6s cubic-bezier(0.4,0,0.2,1)",
                     willChange: "opacity, transform, filter",
                   }}
                 >

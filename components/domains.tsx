@@ -75,8 +75,7 @@ export default function Domains() {
           </p>
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
             <h2
-              className={`${majorMono.className} lowercase text-3xl sm:text-4xl md:text-5xl leading-none tracking-normal text-stroke-black`}
-              style={{ color: "#202020" }}
+              className={`${majorMono.className} lowercase text-3xl sm:text-4xl md:text-4xl lg:text-5xl leading-none tracking-normal text-stroke-black text-[#202020]`}
             >
               domain of
               <br />

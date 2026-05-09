@@ -4,7 +4,7 @@ import { GlitchImage } from "./GlitchImage";
 
 export default function Hero() {
   return (
-    <section className="relative flex flex-col items-center justify-center min-h-screen bg-[#f0efed] px-4 sm:px-6 pt-24 sm:pt-28 md:pt-32 pb-40 sm:pb-56 md:pb-72 text-center overflow-hidden">
+    <section className="relative flex flex-col items-center justify-center min-h-screen bg-[#f0efed] px-4 sm:px-6 pt-16 sm:pt-10 md:pt-8 pb-40 sm:pb-56 md:pb-72 text-center overflow-hidden">
       {/* Left border rail */}
       <GlitchImage
         src="/images/pixels-1.png"
@@ -23,8 +23,7 @@ export default function Hero() {
         className="relative z-10 mb-10 sm:mb-14 md:mb-18 w-14 sm:w-16 md:w-20 h-auto"
       />
       <h1
-        className={`${majorMono.className} relative z-10 lowercase text-center text-5xl sm:text-7xl md:text-8xl lg:text-9xl leading-none tracking-[0.06em] text-stroke-black`}
-        style={{ color: "#202020" }}
+        className={`${majorMono.className} relative z-10 lowercase text-center text-[2rem] xs:text-4xl sm:text-5xl md:text-6xl lg:text-9xl leading-none tracking-[0.06em] text-stroke-black text-[#202020]`}
       >
         Fahrenheit
         <br />
