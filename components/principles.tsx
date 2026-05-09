@@ -12,51 +12,43 @@ const lines = [
   "Is ours.",
 ];
 
-// Each line's reveal window covers RANGE of total scroll progress.
-// Starts are spread evenly so the last line completes at progress = 1.
-const RANGE = 0.3;
+const DELAYS = [0, 1000, 2000, 3000, 4000, 5000];
 
 export default function Principles() {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const [progress, setProgress] = useState(0);
+  const [visibleCount, setVisibleCount] = useState(0);
+  const timersRef = useRef<ReturnType<typeof setTimeout>[]>([]);
 
   useEffect(() => {
     const el = sectionRef.current;
     if (!el) return;
 
-    let raf = 0;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          // Clear any existing timers
+          timersRef.current.forEach(clearTimeout);
+          timersRef.current = [];
 
-    const update = () => {
-      const rect = el.getBoundingClientRect();
-      const vh = window.innerHeight;
-      // Small entry buffer so the first line doesn't pop the moment
-      // the section's top crosses into view.
-      const delay = vh * 0.1;
-      // Reveal completes when the section is centered in the viewport
-      // (i.e. tied to the section's actual scroll-through, not a fixed
-      // multiple of vh). Floored to avoid being too fast on short sections.
-      const scrollWindow = Math.max(
-        (vh + rect.height) / 2 - delay,
-        vh * 0.5,
-      );
-      const scrolled = vh - rect.top - delay;
-      const p = Math.min(1, Math.max(0, scrolled / scrollWindow));
-      setProgress(p);
-    };
+          // Schedule each line to appear at its delay
+          DELAYS.forEach((delay, i) => {
+            const t = setTimeout(() => {
+              setVisibleCount((prev) => Math.max(prev, i + 1));
+            }, delay);
+            timersRef.current.push(t);
+          });
 
-    const onScroll = () => {
-      cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(update);
-    };
+          // Stop observing after first trigger
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.2 },
+    );
 
-    update();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll, { passive: true });
-
+    observer.observe(el);
     return () => {
-      cancelAnimationFrame(raf);
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
+      observer.disconnect();
+      timersRef.current.forEach(clearTimeout);
     };
   }, []);
 
@@ -72,24 +64,16 @@ export default function Principles() {
           {/* Lines */}
           <div className="flex flex-col gap-1">
             {lines.map((line, i) => {
-              const start =
-                lines.length > 1
-                  ? (i / (lines.length - 1)) * (1 - RANGE)
-                  : 0;
-              const lineProgress = Math.min(
-                1,
-                Math.max(0, (progress - start) / RANGE),
-              );
+              const isVisible = i < visibleCount;
               return (
                 <p
                   key={i}
-                  className={`${k2d.className} uppercase font-medium text-2xl sm:text-3xl md:text-4xl lg:text-[clamp(2rem,4vw,3.5rem)] leading-[120%] tracking-normal`}
+                  className={`${k2d.className} uppercase font-medium text-2xl sm:text-3xl md:text-4xl lg:text-[clamp(2rem,4vw,3.5rem)] leading-[120%] tracking-normal transition-all duration-700 ease-out`}
                   style={{
-                    opacity: lineProgress,
-                    transform: `translateY(${(1 - lineProgress) * 24}px)`,
-                    filter: `blur(${(1 - lineProgress) * 12}px)`,
+                    opacity: isVisible ? 1 : 0,
+                    transform: isVisible ? "translateY(0)" : "translateY(24px)",
+                    filter: isVisible ? "blur(0px)" : "blur(12px)",
                     color: "#ffffff",
-                    willChange: "opacity, transform, filter",
                   }}
                 >
                   {line}

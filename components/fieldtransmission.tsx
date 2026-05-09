@@ -8,9 +8,9 @@ export default function FieldTransmission() {
 
   return (
     <section className="relative bg-[#212121] text-white px-6 pt-24 pb-24 md:pt-32 md:pb-32 min-h-[500px] flex items-center">
-      <div className="max-w-7xl mx-auto w-full flex flex-col md:flex-row gap-16 md:gap-32 items-center">
+      <div className="max-w-7xl mx-auto w-full flex flex-col lg:flex-row gap-16 lg:gap-32 items-center">
         {/* LEFT — text */}
-        <div className="md:w-[380px] shrink-0">
+        <div className="lg:w-[380px] shrink-0">
           <p className="text-xs tracking-widest text-white/80 mb-6 font-mono">
             05 // VIDEO_LIBRARY
           </p>

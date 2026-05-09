@@ -24,7 +24,7 @@ export default function Footer() {
         aria-hidden="true"
       />
       {/* Content */}
-      <div className="min-h-screen flex flex-col justify-end w-full">
+      <div className="min-h-[80vh] flex flex-col justify-end w-full">
         {/* Bottom row: logo + nav */}
         <div className="flex flex-col lg:flex-row w-full lg:items-end lg:justify-between gap-6 pb-6 px-6 sm:px-10 lg:px-28 z-10">
           {/* Logo + wordmark */}
