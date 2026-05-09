@@ -10,15 +10,21 @@ export default function Footer() {
         style={{ bottom: "calc(1px + 2.75rem)" }}
         aria-hidden="true"
       /> */}
-      <div className="w-full absolute h-20 bg-linear-to-b from-[#212121] to-transparent top-0 z-10" />
+      <div className="w-full absolute h-20 bg-linear-to-b from-[#212121] to-transparent top-0 z-10 pointer-events-none" />
       <img
         src="/images/planet.svg"
         alt="Planet"
-        className="absolute translate-x-180 -translate-y-60 pointer-events-none select-none"
+        className="absolute right-0 bottom-0 w-[110vh] max-w-none aspect-1920/1312 pointer-events-none select-none"
+        style={{
+          WebkitMaskImage:
+            "linear-gradient(to bottom, transparent 0%, black 8%, black 90%, transparent 100%)",
+          maskImage:
+            "linear-gradient(to bottom, transparent 0%, black 8%, black 90%, transparent 100%)",
+        }}
         aria-hidden="true"
       />
       {/* Content */}
-      <div className=" h-screen md:h-[80dvh] flex flex-col justify-end w-full">
+      <div className="min-h-screen flex flex-col justify-end w-full">
         {/* Bottom row: logo + nav */}
         <div className="flex flex-col lg:flex-row w-full lg:items-end lg:justify-between gap-6 pb-6 px-6 sm:px-10 lg:px-28 z-10">
           {/* Logo + wordmark */}
@@ -26,10 +32,10 @@ export default function Footer() {
             <img
               src="/images/logo-white-big.svg"
               alt=""
-              className="w-14 sm:w-16 lg:w-20 h-auto"
+              className="w-10 sm:w-12 lg:w-14 h-auto"
             />
             <span
-              className={`${majorMono.className} text-white lowercase leading-tight text-2xl sm:text-3xl lg:text-4xl tracking-[0.06em] text-stroke`}
+              className={`${majorMono.className} text-white lowercase leading-tight text-lg sm:text-xl lg:text-2xl tracking-[0.06em] text-stroke`}
             >
               fahrenheit
               <br />

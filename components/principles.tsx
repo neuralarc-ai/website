@@ -12,45 +12,51 @@ const lines = [
   "Is ours.",
 ];
 
-// Delay (ms) before each line fades in after the section enters view
-const DELAYS = [0, 1000, 2000, 3000, 4000, 5000];
+// Each line's reveal window covers RANGE of total scroll progress.
+// Starts are spread evenly so the last line completes at progress = 1.
+const RANGE = 0.3;
 
 export default function Principles() {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const [visibleCount, setVisibleCount] = useState(0);
-  const timersRef = useRef<ReturnType<typeof setTimeout>[]>([]);
+  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
     const el = sectionRef.current;
     if (!el) return;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          // Clear any existing timers
-          timersRef.current.forEach(clearTimeout);
-          timersRef.current = [];
+    let raf = 0;
 
-          // Schedule each line to appear at its delay
-          DELAYS.forEach((delay, i) => {
-            const t = setTimeout(() => {
-              setVisibleCount((prev) => Math.max(prev, i + 1));
-            }, delay);
-            timersRef.current.push(t);
-          });
+    const update = () => {
+      const rect = el.getBoundingClientRect();
+      const vh = window.innerHeight;
+      // Small entry buffer so the first line doesn't pop the moment
+      // the section's top crosses into view.
+      const delay = vh * 0.1;
+      // Reveal completes when the section is centered in the viewport
+      // (i.e. tied to the section's actual scroll-through, not a fixed
+      // multiple of vh). Floored to avoid being too fast on short sections.
+      const scrollWindow = Math.max(
+        (vh + rect.height) / 2 - delay,
+        vh * 0.5,
+      );
+      const scrolled = vh - rect.top - delay;
+      const p = Math.min(1, Math.max(0, scrolled / scrollWindow));
+      setProgress(p);
+    };
 
-          // Stop observing after first trigger
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.2 },
-    );
+    const onScroll = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(update);
+    };
 
-    observer.observe(el);
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
 
     return () => {
-      observer.disconnect();
-      timersRef.current.forEach(clearTimeout);
+      cancelAnimationFrame(raf);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
     };
   }, []);
 
@@ -66,18 +72,23 @@ export default function Principles() {
           {/* Lines */}
           <div className="flex flex-col gap-1">
             {lines.map((line, i) => {
-              const visible = visibleCount > i;
+              const start =
+                lines.length > 1
+                  ? (i / (lines.length - 1)) * (1 - RANGE)
+                  : 0;
+              const lineProgress = Math.min(
+                1,
+                Math.max(0, (progress - start) / RANGE),
+              );
               return (
                 <p
                   key={i}
                   className={`${k2d.className} uppercase font-medium text-2xl sm:text-3xl md:text-4xl lg:text-[clamp(2rem,4vw,3.5rem)] leading-[120%] tracking-normal`}
                   style={{
-                    opacity: visible ? 1 : 0,
-                    transform: visible ? "translateY(0px)" : "translateY(24px)",
-                    filter: visible ? "blur(0px)" : "blur(12px)",
+                    opacity: lineProgress,
+                    transform: `translateY(${(1 - lineProgress) * 24}px)`,
+                    filter: `blur(${(1 - lineProgress) * 12}px)`,
                     color: "#ffffff",
-                    transition:
-                      "opacity 1.6s cubic-bezier(0.4,0,0.2,1), transform 1.6s cubic-bezier(0.4,0,0.2,1), filter 1.6s cubic-bezier(0.4,0,0.2,1)",
                     willChange: "opacity, transform, filter",
                   }}
                 >

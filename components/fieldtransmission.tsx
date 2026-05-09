@@ -91,10 +91,20 @@ export default function FieldTransmission() {
 
         {/* RIGHT — YouTube image */}
         <div
-          className="flex-1 max-w-[800px] relative cursor-pointer"
+          className="flex-1 max-w-[800px] relative"
           onMouseEnter={() => setHovered(true)}
           onMouseLeave={() => setHovered(false)}
         >
+          {/* Top-left corner bracket */}
+          <span
+            className="absolute -top-3 -left-3 w-6 h-6 border-t-2 border-l-2 border-white pointer-events-none z-10"
+            aria-hidden="true"
+          />
+          {/* Bottom-right corner bracket */}
+          <span
+            className="absolute -bottom-3 -right-3 w-6 h-6 border-b-2 border-r-2 border-white pointer-events-none z-10"
+            aria-hidden="true"
+          />
           <img
             src="/images/youtube static.svg"
             alt="YouTube channel preview"
