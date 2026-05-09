@@ -3,7 +3,6 @@ import Portfolio from "@/components/portfolio";
 import Domains from "@/components/domains";
 import Principles from "@/components/principles";
 import DeepData from "@/components/deepdata";
-import FieldTransmission from "@/components/fieldtransmission";
 import Contact from "@/components/contact";
 import Footer from "@/components/footer";
 
@@ -15,7 +14,6 @@ export default function Home() {
       <Domains />
       <Principles />
       <DeepData />
-      <FieldTransmission />
       <Contact />
       <Footer />
     </>
