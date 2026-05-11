@@ -59,7 +59,7 @@ export default function Portfolio() {
           className={`${majorMono.className} lowercase text-center mb-16 lg:mb-40 text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-none tracking-normal text-stroke-black`}
           style={{ color: "#202020" }}
         >
-          Our companies dont just enter
+          Our products dont just enter
           <br />
           markets they define them
         </h2>
