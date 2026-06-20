@@ -12,9 +12,9 @@ export default function Contact() {
       id="contact"
       className="relative bg-[#212121] text-white px-6 pt-24 pb-60 min-h-[500px] flex items-center overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto w-full flex flex-col md:flex-row gap-16 md:gap-24 items-stretch">
+      <div className="max-w-7xl mx-auto w-full flex flex-col-reverse lg:flex-row gap-12 lg:gap-16 items-stretch">
         {/* LEFT — contact rows */}
-        <div className="flex-1 w-full flex flex-col border border-zinc-700">
+        <div className="flex-1 w-full min-w-0 flex flex-col border border-zinc-700">
           {contacts.map((item, i) => (
             <a
               key={i}
@@ -41,9 +41,9 @@ export default function Contact() {
         </div>
 
         {/* RIGHT — label + title + description */}
-        <div className="md:w-[380px] shrink-0 flex flex-col">
+        <div className="lg:w-[380px] shrink-0 flex flex-col">
           <p className="text-xs tracking-widest text-white/80 mb-6 font-mono">
-            05 // CONTACT
+            06 // CONTACT
           </p>
           <h2
             className={`${majorMono.className} lowercase text-transparent mb-6 text-3xl sm:text-4xl md:text-5xl leading-none tracking-[0.04em] text-stroke-white`}

@@ -32,7 +32,7 @@ export default function Hero() {
 
       {/* Tagline */}
       <p
-        className={`${k2d.className} relative z-10 mt-5 sm:mt-6 md:mt-8 text-center text-zinc-500 font-thin text-sm sm:text-lg md:text-xl lg:text-2xl leading-relaxed sm:leading-none tracking-normal px-2`}
+        className={`${k2d.className} relative z-10 mt-5 sm:mt-6 md:mt-8 text-center text-zinc-500 text-xl sm:text-2xl md:text-3xl leading-relaxed sm:leading-snug tracking-normal px-2`}
       >
         We build intelligence at the edge of what is known.
         <br />

@@ -33,42 +33,48 @@ export default function Portfolio() {
   return (
     <section
       id="products"
-      className="relative bg-[#f0efed] px-6 min-h-screen flex flex-col justify-center py-24 overflow-hidden"
+      className="relative bg-[#f0efed] px-4 sm:px-6 flex flex-col justify-center min-h-[60vh] sm:min-h-[70vh] lg:min-h-screen overflow-hidden"
     >
-      <GlitchImage
+      {/* Top pixel pattern */}
+      <img
         src="/images/pixels-2.png"
-        className="absolute top-0 left-0 w-full"
         alt=""
-        align="top"
+        className="absolute top-0 left-0 w-full max-h-[100px] sm:max-h-[140px] md:max-h-[180px] lg:max-h-[220px] xl:max-h-none object-cover object-top"
+        style={{ filter: "drop-shadow(rgba(0, 0, 0, 0.18) 0px 4px 8px)" }}
       />
-      <PixelFloat count={50} color="#202020" />
+
       {/* Left border rail */}
       {/* <div
         className="absolute left-16 top-0 bottom-0 w-px bg-[#202020]"
         aria-hidden="true"
       /> */}
 
-      <div className="relative z-10 max-w-6xl mx-auto w-full py-20 pt-32 lg:py-32 lg:pt-48">
-        {/* Section label */}
-        <p className="text-xs tracking-widest text-[#202020] mb-4 font-mono text-center">
-          01 // PORTFOLIO
-        </p>
+      <div className="relative z-10 max-w-[1400px] mx-auto w-full px-4 sm:px-6 lg:px-16 py-10 pt-32 sm:pt-40 md:pt-48 lg:pt-64 xl:pt-80">
+        {/* Two-column layout: text left, cards right */}
+        <div className="flex flex-col xl:flex-row xl:items-start xl:gap-24 gap-8 sm:gap-12">
+          {/* Left side: section label + heading */}
+          <div className="xl:w-2/5 flex-shrink-0">
+            {/* Section label */}
+            <p className="text-[10px] sm:text-xs tracking-widest text-[#202020] mb-3 sm:mb-4 font-mono">
+              03 // PORTFOLIO
+            </p>
 
-        {/* Heading */}
-        <h2
-          className={`${majorMono.className} lowercase text-center mb-16 lg:mb-40 text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-none tracking-normal text-stroke-black`}
-          style={{ color: "#202020" }}
-        >
-          Our products dont just enter
-          <br />
-          markets they define them
-        </h2>
+            {/* Heading */}
+            <h2
+              className={`${majorMono.className} lowercase text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl leading-tight tracking-normal text-stroke-black text-[#202020]`}
+            >
+              Products that
+              <br />
+              define markets
+            </h2>
+          </div>
 
-        {/* Two cards side by side */}
-        <div className="w-full flex flex-col lg:flex-row items-center justify-around gap-8">
-          {companies.map((company) => (
-            <CompanyCard key={company.id} company={company} />
-          ))}
+          {/* Right side: cards */}
+          <div className="xl:w-3/5 flex flex-col sm:flex-row items-stretch justify-center gap-4 sm:gap-4 lg:gap-8 w-full">
+            {companies.map((company) => (
+              <CompanyCard key={company.id} company={company} />
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -118,7 +124,7 @@ function CompanyCard({
 
   return (
     <div
-      className="relative flex flex-col items-center px-10 pt-14 pb-10 w-full lg:w-auto lg:min-w-[400px] min-h-[500px] lg:min-h-[600px] border transition-all duration-400 ease-in-out cursor-pointer"
+      className="relative flex flex-col items-center px-4 sm:px-6 pt-6 sm:pt-8 pb-4 sm:pb-6 w-full sm:flex-1 sm:min-w-0 xl:min-w-[240px] min-h-[220px] sm:min-h-[260px] lg:min-h-[300px] border transition-all duration-400 ease-in-out cursor-pointer"
       style={{ ...bgStyle, borderColor }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
@@ -132,10 +138,14 @@ function CompanyCard({
       ].map((pos, i) => (
         <span
           key={i}
-          className={`absolute ${pos} text-base leading-none select-none font-mono transition-colors duration-300`}
-          style={{ color: cornerColor }}
+          className={`absolute ${pos} w-4 h-4 transition-colors duration-300`}
         >
-          {["┌", "┐", "└", "┘"][i]}
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            {i === 0 && <path d="M0 16V0H16" stroke={cornerColor} strokeWidth="2.5" />}
+            {i === 1 && <path d="M16 16V0H0" stroke={cornerColor} strokeWidth="2.5" />}
+            {i === 2 && <path d="M0 0V16H16" stroke={cornerColor} strokeWidth="2.5" />}
+            {i === 3 && <path d="M16 0V16H0" stroke={cornerColor} strokeWidth="2.5" />}
+          </svg>
         </span>
       ))}
 
@@ -152,11 +162,11 @@ function CompanyCard({
       </p>
 
       {/* Logo */}
-      <div className="mt-14">
+      <div className="mt-6">
         <img
           src={company.logo}
           alt={company.name}
-          className="w-24 h-24 object-contain transition-all ease-in-out duration-300"
+          className="w-10 h-10 object-contain transition-all ease-in-out duration-300"
           style={{
             filter:
               hovered && !company.hoverTextDark
@@ -168,7 +178,7 @@ function CompanyCard({
 
       {/* Description */}
       <p
-        className={`${k2d.className} text-center max-w-[240px] mt-14 font-normal text-base leading-snug tracking-normal transition-colors duration-300 whitespace-pre-line`}
+        className={`${k2d.className} text-center max-w-[240px] mt-6 font-normal text-xs leading-snug tracking-normal transition-colors duration-300 whitespace-pre-line`}
         style={{ color: mutedColor }}
       >
         {company.description}

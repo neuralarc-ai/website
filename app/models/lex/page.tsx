@@ -736,7 +736,6 @@ export default function FRLexPage() {
                 </button>
               ))}
             </nav>
-            <ShareIcons />
           </div>
         </aside>
 

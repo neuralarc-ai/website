@@ -12,8 +12,8 @@ export default function Home() {
     <>
       <Hero />
       <Models />
-      <Portfolio />
       <Domains />
+      <Portfolio />
       <Principles />
       <DeepData />
       <Contact />

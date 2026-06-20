@@ -58,7 +58,7 @@ export default function Principles() {
         <div className="max-w-7xl mx-auto w-full">
           {/* Section label */}
           <p className="text-xs tracking-widest text-white/80 mb-16 font-mono">
-            03 // OPERATING PRINCIPLES
+            04 // OPERATING PRINCIPLES
           </p>
 
           {/* Lines */}

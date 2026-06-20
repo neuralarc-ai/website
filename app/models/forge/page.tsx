@@ -601,7 +601,6 @@ export default function FRForgePage() {
                 </button>
               ))}
             </nav>
-            <ShareIcons />
           </div>
         </aside>
 

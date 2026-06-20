@@ -20,7 +20,7 @@ export default function DeepData() {
         {/* LEFT */}
         <div className="md:w-[380px] shrink-0">
           <p className="text-xs tracking-widest text-white/80 mb-6 font-mono">
-            04 // DEEP DATA
+            05 // DEEP DATA
           </p>
           <h2
             className={`${majorMono.className} lowercase text-transparent mb-6 text-3xl sm:text-4xl md:text-5xl leading-none tracking-[0.04em] text-stroke-white`}

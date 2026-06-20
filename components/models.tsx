@@ -12,6 +12,7 @@ const models = [
     id: "forge",
     nameLine1: "FR-Forge",
     nameLine2: "1.7B",
+    version: "v0.01",
     fullName: "FR-Forge-1.7B",
     subtitle: "Precision Intelligence for the Factory Floor",
     type: "TLM · Manufacturing",
@@ -24,6 +25,7 @@ const models = [
     id: "lex",
     nameLine1: "FR-Lex",
     nameLine2: "1.7B",
+    version: "v0.01",
     fullName: "FR-Lex-1.7B",
     subtitle: "Thin Language Model for Legal Reasoning",
     type: "TLM · Law",
@@ -57,13 +59,18 @@ export default function Models() {
 
         {/* Heading */}
         <h2
-          className={`${majorMono.className} lowercase text-center mb-16 lg:mb-40 text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-none tracking-normal text-stroke-black`}
+          className={`${majorMono.className} lowercase text-center mb-4 text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-none tracking-normal text-stroke-black`}
           style={{ color: "#202020" }}
         >
-          Thin language models
-          <br />
-          built for the real world
+          Our Models
         </h2>
+
+        {/* Subtitle */}
+        <p
+          className={`${k2d.className} text-center text-base sm:text-lg md:text-xl text-[#71717a] mb-10 lg:mb-20`}
+        >
+          Thin language models built for the real world
+        </p>
 
         {/* Two square cards */}
         <div className="w-full flex flex-col lg:flex-row items-center justify-around gap-8">
@@ -83,6 +90,7 @@ function ModelCard({
     id: string;
     nameLine1: string;
     nameLine2: string;
+    version: string;
     fullName: string;
     subtitle: string;
     type: string;
@@ -109,10 +117,14 @@ function ModelCard({
         (pos, i) => (
           <span
             key={i}
-            className={`absolute ${pos} text-base leading-none select-none font-mono transition-colors duration-300 z-20`}
-            style={{ color: cornerColor }}
+            className={`absolute ${pos} w-4 h-4 z-20 transition-colors duration-300`}
           >
-            {["┌", "┐", "└", "┘"][i]}
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              {i === 0 && <path d="M0 16V0H16" stroke={cornerColor} strokeWidth="2.5" />}
+              {i === 1 && <path d="M16 16V0H0" stroke={cornerColor} strokeWidth="2.5" />}
+              {i === 2 && <path d="M0 0V16H16" stroke={cornerColor} strokeWidth="2.5" />}
+              {i === 3 && <path d="M16 0V16H0" stroke={cornerColor} strokeWidth="2.5" />}
+            </svg>
           </span>
         )
       )}
@@ -126,26 +138,37 @@ function ModelCard({
             gridGap={6}
             color={model.gridColor}
             maxOpacity={hovered ? 0.65 : 0.45}
-            flickerChance={0.1}
+            flickerChance={hovered ? 0.1 : 0}
             width={440}
             height={440}
           />
         </div>
 
-        <div className="relative z-10 text-center select-none">
+        <div className="relative z-10 text-center select-none flex flex-col items-center gap-3">
           <p
             className={`${majorMono.className} lowercase leading-none tracking-wide`}
             style={{
-              fontSize: "clamp(2rem, 5vw, 3rem)",
+              fontSize: "2.75rem",
               color: "transparent",
-              WebkitTextStrokeWidth: "2px",
+              WebkitTextStrokeWidth: "1.5px",
               WebkitTextStrokeColor: textColor,
               transition: "color 0.3s, -webkit-text-stroke-color 0.3s",
             }}
           >
             {model.nameLine1}
-            <br />
-            {model.nameLine2}
+          </p>
+          <p
+            className={`${majorMono.className} lowercase leading-none tracking-wide`}
+            style={{
+              fontSize: "2.75rem",
+              fontWeight: 900,
+              color: textColor,
+              WebkitTextStrokeWidth: "1px",
+              WebkitTextStrokeColor: textColor,
+              transition: "color 0.3s, -webkit-text-stroke-color 0.3s",
+            }}
+          >
+            {model.version} {model.nameLine2}
           </p>
         </div>
       </div>
@@ -153,21 +176,21 @@ function ModelCard({
       {/* Bottom info area */}
       <div className="relative z-10 flex flex-col items-center gap-3 pb-10 px-8">
         <span
-          className="text-[9px] tracking-[0.25em] uppercase font-mono px-3 py-1 border transition-colors duration-300"
+          className="text-[10px] tracking-[0.25em] uppercase font-mono px-3 py-px border transition-colors duration-300"
           style={{ borderColor: tagBorderColor, color: tagTextColor }}
         >
           MODELS
         </span>
 
         <p
-          className={`${k2d.className} text-center text-sm leading-snug transition-colors duration-300`}
+          className={`${k2d.className} text-center text-base leading-snug transition-colors duration-300`}
           style={{ color: textColor }}
         >
           {model.fullName}: {model.subtitle}
         </p>
 
         <p
-          className="font-mono text-[10px] tracking-widest transition-colors duration-300"
+          className="font-mono text-xs tracking-widest transition-colors duration-300"
           style={{ color: mutedColor }}
         >
           {model.type}
@@ -177,7 +200,7 @@ function ModelCard({
   );
 
   const sharedClassName =
-    "relative flex flex-col w-full lg:w-auto lg:min-w-100 lg:max-w-115 aspect-square border transition-all duration-400 ease-in-out cursor-pointer overflow-hidden";
+    "relative flex flex-col w-full sm:w-[320px] md:w-[360px] lg:w-[420px] aspect-square border transition-all duration-400 ease-in-out cursor-pointer overflow-hidden hover:scale-105";
 
   if (model.href) {
     return (

@@ -52,7 +52,7 @@ export default function Domains() {
   return (
     <section
       id="research"
-      className="relative bg-[#f0efed] py-20 pb-56 md:py-32 md:pb-[30rem]"
+      className="relative bg-[#f0efed] py-10 pb-72 md:py-16 md:pb-[38rem]"
     >
       <img
         src="/images/pixels-3.png"
@@ -82,7 +82,7 @@ export default function Domains() {
               inquiry
             </h2>
             <p
-              className={`${k2d.className} text-zinc-500 text-sm leading-relaxed max-w-md`}
+              className={`${k2d.className} text-zinc-500 text-xl leading-relaxed max-w-md`}
             >
               Our research agenda spans the hardest problems in applied AI from
               deep data infrastructure to emergent model behaviour.
